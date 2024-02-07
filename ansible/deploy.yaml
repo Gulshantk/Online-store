@@ -1,0 +1,16 @@
+---
+- name: Deploy WAR file to Tomcat
+  hosts: 13.201.130.157
+  become: true
+  tasks:
+    - name: Copy WAR file to Tomcat webapps directory
+      copy:
+        src: /var/lib/jenkins/workspace/online-shopping/target/shopping-cart-0.0.1-SNAPSHOT.war
+        dest: /var/www/html
+      notify: Restart Tomcat
+
+  handlers:
+    - name: Restart Tomcat
+      systemd:
+        name: tomcat
+        state: restarted
