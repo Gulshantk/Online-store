@@ -17,6 +17,6 @@ EXPOSE 8080
 #ARG DOCKER_TAG
 
 # Uncomment the following lines to push the image to Docker Hub
-# RUN echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-# RUN docker tag your-application-image:$DOCKER_TAG $DOCKER_USERNAME/$DOCKER_REPO:$DOCKER_TAG
-# RUN docker push $DOCKER_USERNAME/$DOCKER_REPO:$DOCKER_TAG
+RUN echo "dckr_pat_GljleFTeMlDoVts1r3jBiTxpmmg" | docker login -u "gulshantk" --password-stdin
+RUN docker tag online-app:on gulshantk/online_app:image1
+RUN docker push gulshantk/online_app:image1
