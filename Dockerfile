@@ -1,4 +1,4 @@
-From tomcat:9-jre11-slim
+FROM tomcat:9-jre11-slim
 MAINTAINER gulshantk12@gmail.com
 WORKDIR /app
 
