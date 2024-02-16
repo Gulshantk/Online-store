@@ -19,5 +19,5 @@ EXPOSE 8080
 
 # Uncomment the following lines to push the image to Docker Hub
 #RUN echo "Test@123" | docker login -u "gulshantk" --password-stdin
-RUN docker tag online-app:latest gulshantk/online_app:image1
-RUN docker push -a
+#RUN docker tag online-app:latest gulshantk/online_app:image1
+#RUN docker push -a
