@@ -13,10 +13,11 @@ EXPOSE 8080
 
 # Example: Uncomment the following lines to push the image to Docker Hub
 #ARG DOCKER_USERNAME
-#ARG DOCKER_REPO
-#ARG DOCKER_TAG
+#ARG DOCKER_REPO dckr_pat_GljleFTeMlDoVts1r3jBiTxpmmg
+#ARG DOCKER_TAG gulshantk/online_app:image1
+
 
 # Uncomment the following lines to push the image to Docker Hub
-#RUN echo "dckr_pat_GljleFTeMlDoVts1r3jBiTxpmmg" | docker login -u "gulshantk" --password-stdin
-RUN docker tag online-app:on gulshantk/online_app:image1
-RUN docker push gulshantk/online_app:image1
+RUN echo "Test@123" | docker login -u "gulshantk" --password-stdin
+#RUN docker tag online-app:on gulshantk/online_app:image1
+RUN docker push .
