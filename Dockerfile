@@ -6,7 +6,7 @@ WORKDIR /app
 COPY target/shopping-cart-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/
 
 # Optionally, expose the port your application is running on (adjust as needed)
-EXPOSE 8080
+EXPOSE 8000
 
 # Health check endpoint (optional, adjust as needed)
 #HEALTHCHECK --interval=30s --timeout=10s CMD curl --fail http://localhost:8080/ || exit 1
