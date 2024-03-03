@@ -24,6 +24,8 @@ RUN curl -O http://apache.mirrors.ionfish.org/tomcat/tomcat-9/v9.0.52/bin/apache
     rm apache-tomcat-9.0.52.tar.gz && \
     ln -s /opt/apache-tomcat-9.0.52 /opt/tomcat
 
+RUN apt-get install -y mysql-server apt-utils
+
 # Remove the default ROOT application
 RUN rm -rf /opt/tomcat/webapps/ROOT
 
