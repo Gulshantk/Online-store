@@ -28,7 +28,7 @@ RUN curl -O http://apache.mirrors.ionfish.org/tomcat/tomcat-9/v9.0.52/bin/apache
 RUN rm -rf /opt/tomcat/webapps/ROOT
 
 # Copy the WAR file into the webapps directory
-COPY target/shopping-cart-0.0.1-SNAPSHOT.war /opt/tomcat/webapps/shopping-cart-0.0.1-SNAPSHOT.war
+COPY target/shopping-cart-0.0.1-SNAPSHOT.war /opt/tomcat/webapps/ROOT.war
 
 # Expose the default Tomcat port
 EXPOSE 8000
