@@ -3,8 +3,8 @@ pipeline {
     
     environment {
         MAVEN_HOME = tool 'maven' 
-        GIT_REPO = 'https://github.com/Gulshantk/quiz.git'
-        GIT_BRANCH = '*/master'
+        GIT_REPO = 'https://github.com/Gulshantk/Online-store.git'
+        GIT_BRANCH = '*/dev'
         //APACHE_ROOT = '/var/www/html'
        registry='gulshantk/online_app'
         dockerlogin = credentials('dockerid')
@@ -30,10 +30,10 @@ pipeline {
                 script{
                     withCredentials([usernamePassword(credentialsId: 'dockerid', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                       sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'    
-                      sh 'docker image build --no-cache -t quiz .'
-                      sh 'docker tag quiz:latest gulshantk/online_app:latest'
+                      sh 'docker image build --no-cache -t shop .'
+                      sh 'docker tag shop:latest gulshantk/online_app:latest'
                       sh 'docker push gulshantk/online_app:latest'
-                      sh "docker run --name quiz -d -p 8030:8000 gulshantk/online_app:latest"
+                      sh "docker run --name shop -d -p 8030:8000 gulshantk/online_app:latest"
                     }
                 }
             }
