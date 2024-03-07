@@ -3,8 +3,8 @@ MAINTAINER gulshantk12@gmail.com
 WORKDIR /app
 
 # Copy the WAR file into the webapps directory of Tomcat
-COPY target/shopping-cart-0.0.1-SNAPSHOT.war /app/code/
-COPY /app/code/shopping-cart-0.0.1-SNAPSHOT.war  /var/lib/tomcatX/webapps/
+COPY target/shopping-cart-0.0.1-SNAPSHOT.war /var/lib/tomcatX/webapps/
+#COPY /app/code/shopping-cart-0.0.1-SNAPSHOT.war  /var/lib/tomcatX/webapps/   /app/code/
 
 # Optionally, expose the port your application is running on (adjust as needed)
 EXPOSE 8000
