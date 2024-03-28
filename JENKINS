@@ -51,3 +51,81 @@ pipeline {
     }
 }
 
+
+
+
+
+
+------------------------------------------
+
+
+pipeline {
+    agent any
+    
+    environment {
+        MAVEN_HOME = tool 'maven' 
+        GIT_REPO = 'https://github.com/Gulshantk/Devops-project-1-Online-store-.git'
+        GIT_BRANCH = '*/dev'
+        //APACHE_ROOT = '/var/www/html'
+       registry='gulshantk/online_app'
+        dockerlogin = credentials('dockerid')
+    }
+    tools {
+        maven "maven"
+    }
+    stages {
+        stage('checkout') {
+            steps{
+                // Get some code from a GitHub repository
+                checkout([$class: 'GitSCM', branches: [[name: GIT_BRANCH]], userRemoteConfigs: [[url: GIT_REPO]]])
+            }
+        }
+        stage('Build') {
+           steps{
+             //Run Maven on a Unix agent.
+             sh "mvn -Dmaven.test.failure.ignore=true clean package"
+           }
+        }
+        stage('Docker image'){
+            steps{
+                script{
+                    withCredentials([usernamePassword(credentialsId: 'dockerid', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                      sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'  
+                      sh 'docker rm shop'
+                      sh 'docker image build --no-cache -t shop .'
+                      sh 'docker tag shop:latest gulshantk/online_app:latest'
+                      sh 'docker push gulshantk/online_app:latest'
+                      sh "docker run --name shop -d -p 8030:8000 gulshantk/online_app:latest"
+                    }
+                }
+            }
+        }
+        stage("Download image on Tomcat host") {
+            steps{
+                sh "docker pull https://hub.docker.com/r/gulshantk/online_app/tags:${BUILD_NUMBER}"
+            }
+        }
+
+        stage("SCP to Tomcat host") {
+            steps{
+                 sh "scp latest:${BUILD_NUMBER}.tar.gz user@tomcat-host:/path/to/tomcat/webapps"
+            }
+               
+        }
+
+       // stage('deploy k8'){
+         //   steps{
+           //     script{
+             //       try{
+               //         sh "kubctl apply -f "
+                 //       }
+                   // catch(error){
+                     //   sh "kubctl create -f "
+                        //}
+               // }    
+          //  }
+        }
+    }
+//}
+
+
