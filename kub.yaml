@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: online-store
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLable: frontend
+    aa: web
+  template:
+    metadata:
+      name: online-store
+      label:
+        type: frontend
+    spec:
+      containers:
+        - name: online-store-site
+          image: getting-started
+          
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: onlinestore-entrypoint
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    aa: web
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30001
